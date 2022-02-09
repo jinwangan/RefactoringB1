@@ -76,7 +76,7 @@ public class Customer {
 
 			eachPoint++;
 
-			if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE) )
+			if (each.getVideo().checkNewReleased() )
 				eachPoint++;
 
 			if ( daysRented > each.getDaysRentedLimit() )
