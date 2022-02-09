@@ -31,6 +31,10 @@ public class Customer {
 
 	}
 
+	public void removeAllRentals(){
+		rentals.clear();
+	}
+
 	
 	// SRP violation - Long Method
 	// Feature Envy
@@ -57,7 +61,7 @@ public class Customer {
 				daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 			}
 
-			// Strategy ¶Ç´Â enumÀ¸·Î Ã³¸®
+			// Strategy ï¿½Ç´ï¿½ enumï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			// magic no
 			switch (each.getVideo().getPriceCode()) {
 			case Video.REGULAR:
@@ -78,7 +82,7 @@ public class Customer {
 			if ( daysRented > each.getDaysRentedLimit() )
 				eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty()) ;
 
-			// string generating ÇÏ´Â ºÎºÐÀ¸·Î »©³½´Ù
+			// string generating ï¿½Ï´ï¿½ ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			result += "\t" + each.getVideo().getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
 					+ "\tPoint: " + eachPoint + "\n";
 
