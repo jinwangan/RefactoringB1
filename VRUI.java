@@ -44,13 +44,18 @@ public class VRUI {
 		Customer foundCustomer = findCustomer(customerName);
 
 		// query
-		foundCustomer.printCustomerInfo();
-		for ( Rental rental: foundCustomer.getRentals() ) {
-			System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;
-			System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
-		}
-		// modifier
-		foundCustomer.clear();
+		if (foundCustomer == null) {
+			System.out.println("not found costomer.");
+
+		} else {
+			foundCustomer.printCustomerInfo();
+			for ( Rental rental: foundCustomer.getRentals() ) {
+				System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;
+				System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
+			}
+			// modifier
+			foundCustomer.clear();
+		}		
 	}
 
 	public void returnVideo() {
