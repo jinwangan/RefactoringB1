@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class VRUI {
 	private static Scanner scanner = new Scanner(System.in) ;
 
-	private List<Customer> customers = new ArrayList<Customer>() ;
+	private List<ConcreteCustomer> customers = new ArrayList<ConcreteCustomer>() ;
 
 	private List<Video> videos = new ArrayList<Video>() ;
 
@@ -37,29 +37,26 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 
-		if ( foundCustomer == null ) {
-			System.out.println("No customer found") ;
-		} else {
-			// query
-			System.out.println("Name: " + foundCustomer.getName() +
-					"\tRentals: " + foundCustomer.getRentals().size()) ;
-			for ( Rental rental: foundCustomer.getRentals() ) {
-				System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;
-				System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
-			}
-			// modifier
-			List<Rental> rentals = new ArrayList<Rental>() ;
-			foundCustomer.setRentals(rentals);
+		// query
+		foundCustomer.printCustomerInfo();
+		for ( Rental rental: foundCustomer.getRentals() ) {
+			System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;
+			System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
 		}
+		// modifier
+		List<Rental> rentals = new ArrayList<Rental>() ;
+		foundCustomer.setRentals(rentals);
 	}
+
+
 
 	public void returnVideo() {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 		if ( foundCustomer == null ) return ;
 
 		System.out.println("Enter video title to return: ") ;
@@ -75,20 +72,18 @@ public class VRUI {
 		}
 	}
 
-	private Customer findCustomer(String customerName) {
-		Customer foundCustomer = null ;
-		for ( Customer customer: customers ) {
+	private ConcreteCustomer findCustomer(String customerName) {
+		for ( ConcreteCustomer customer: customers ) {
 			if ( customer.getName().equals(customerName)) {
-				foundCustomer = customer ;
-				break ;
+				return customer ;
 			}
 		}
-		return foundCustomer;
+		return new NullCustomer(customerName);
 	}
 
 	private void init() {
-		Customer james = new Customer("James") ;
-		Customer brown = new Customer("Brown") ;
+		ConcreteCustomer james = new ConcreteCustomer("James") ;
+		ConcreteCustomer brown = new ConcreteCustomer("Brown") ;
 		customers.add(james) ;
 		customers.add(brown) ;
 
@@ -115,7 +110,7 @@ public class VRUI {
 
 	public void listCustomers() {
 		System.out.println("List of customers");
-		for ( Customer customer: customers ) {
+		for ( ConcreteCustomer customer: customers ) {
 			System.out.println("Name: " + customer.getName() +
 					"\tRentals: " + customer.getRentals().size()) ;
 			for ( Rental rental: customer.getRentals() ) {
@@ -130,7 +125,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 
 		if ( foundCustomer == null ) {
 			System.out.println("No customer found") ;
@@ -144,7 +139,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 
 		if ( foundCustomer == null ) return ;
 
@@ -174,7 +169,7 @@ public class VRUI {
 		if ( object.equals("customer") ) {
 			System.out.println("Enter customer name: ") ;
 			String name = scanner.next();
-			Customer customer = new Customer(name) ;
+			ConcreteCustomer customer = new ConcreteCustomer(name) ;
 			customers.add(customer) ;
 		}
 		else {
