@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class VRUI {
 	private static Scanner scanner = new Scanner(System.in) ;
 
-	private List<Customer> customers = new ArrayList<Customer>() ;
+	private List<ConcreteCustomer> customers = new ArrayList<ConcreteCustomer>() ;
 
 	private List<Video> videos = new ArrayList<Video>() ;
 
@@ -33,11 +33,15 @@ public class VRUI {
 		System.out.println("Bye");
 	}
 
-	public void clearRentals() {
+	public void printEnterCustomerName() {
 		System.out.println("Enter customer name: ") ;
+	}
+	
+	public void clearRentals() {
+		printEnterCustomerName();
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 
 		// query
 		foundCustomer.printCustomerInfo();
@@ -53,10 +57,10 @@ public class VRUI {
 
 
 	public void returnVideo() {
-		System.out.println("Enter customer name: ") ;
+		printEnterCustomerName();
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 		if ( foundCustomer == null ) return ;
 
 		System.out.println("Enter video title to return: ") ;
@@ -72,18 +76,18 @@ public class VRUI {
 		}
 	}
 
-	private Customer findCustomer(String customerName) {
-		for ( Customer customer: customers ) {
+	private ConcreteCustomer findCustomer(String customerName) {
+		for ( ConcreteCustomer customer: customers ) {
 			if ( customer.getName().equals(customerName)) {
 				return customer ;
 			}
 		}
-		return null;
+		return new NullCustomer(customerName);
 	}
 
 	private void init() {
-		Customer james = new Customer("James") ;
-		Customer brown = new Customer("Brown") ;
+		ConcreteCustomer james = new ConcreteCustomer("James") ;
+		ConcreteCustomer brown = new ConcreteCustomer("Brown") ;
 		customers.add(james) ;
 		customers.add(brown) ;
 
@@ -110,7 +114,7 @@ public class VRUI {
 
 	public void listCustomers() {
 		System.out.println("List of customers");
-		for ( Customer customer: customers ) {
+		for ( ConcreteCustomer customer: customers ) {
 			System.out.println("Name: " + customer.getName() +
 					"\tRentals: " + customer.getRentals().size()) ;
 			for ( Rental rental: customer.getRentals() ) {
@@ -122,10 +126,10 @@ public class VRUI {
 	}
 
 	public void getCustomerReport() {
-		System.out.println("Enter customer name: ") ;
+		printEnterCustomerName();
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 
 		if ( foundCustomer == null ) {
 			System.out.println("No customer found") ;
@@ -136,10 +140,10 @@ public class VRUI {
 	}
 
 	public void rentVideo() {
-		System.out.println("Enter customer name: ") ;
+		printEnterCustomerName();
 		String customerName = scanner.next() ;
 
-		Customer foundCustomer = findCustomer(customerName);
+		ConcreteCustomer foundCustomer = findCustomer(customerName);
 
 		if ( foundCustomer == null ) return ;
 
@@ -166,9 +170,9 @@ public class VRUI {
 	}
 
 	private void registerCustomer() {
-		System.out.println("Enter customer name: ") ;
+		printEnterCustomerName();
 		String name = scanner.next();
-		Customer customer = new Customer(name) ;
+		ConcreteCustomer customer = new ConcreteCustomer(name) ;
 		customers.add(customer) ;
 	}
 
