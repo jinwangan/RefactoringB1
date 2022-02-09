@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Customer {
+public class ConcreteCustomer {
 	private String name;
 
 	private List<Rental> rentals = new ArrayList<Rental>();
 
-	public Customer(String name) {
+	public ConcreteCustomer(String name) {
 		this.setName(name);
 	}
 
@@ -31,10 +31,10 @@ public class Customer {
 
 	}
 
-	
-	// SRP violation - Long Method
-	// Feature Envy
-	
+	public void printCustomerInfo(){
+		System.out.println("Name: " + getName() + "\tRentals: " + getRentals().size()) ;
+	}
+
 	public String getReport() {
 		String result = "Customer Report for " + getName() + "\n";
 
@@ -57,7 +57,7 @@ public class Customer {
 				daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 			}
 
-			// Strategy ¶Ç´Â enumÀ¸·Î Ã³¸®
+			// Strategy ï¿½Ç´ï¿½ enumï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			// magic no
 			switch (each.getVideo().getPriceCode()) {
 			case Video.REGULAR:
@@ -78,7 +78,7 @@ public class Customer {
 			if ( daysRented > each.getDaysRentedLimit() )
 				eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty()) ;
 
-			// string generating ÇÏ´Â ºÎºÐÀ¸·Î »©³½´Ù
+			// string generating ï¿½Ï´ï¿½ ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			result += "\t" + each.getVideo().getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
 					+ "\tPoint: " + eachPoint + "\n";
 
