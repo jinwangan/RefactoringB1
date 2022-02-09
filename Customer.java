@@ -31,6 +31,10 @@ public class Customer {
 
 	}
 
+	public void clear(){
+		rentals.clear();
+	}
+
 	public void printCustomerInfo(){
 		System.out.println("Name: " + getName() + "\tRentals: " + getRentals().size()) ;
 	}

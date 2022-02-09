@@ -50,11 +50,8 @@ public class VRUI {
 			System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
 		}
 		// modifier
-		List<Rental> rentals = new ArrayList<Rental>() ;
-		foundCustomer.setRentals(rentals);
+		foundCustomer.clear();
 	}
-
-
 
 	public void returnVideo() {
 		printEnterCustomerName();
@@ -164,9 +161,7 @@ public class VRUI {
 		foundVideo.setRented(true);
 
 		// encapulate collection
-		List<Rental> customerRentals = foundCustomer.getRentals() ;
-		customerRentals.add(rental);
-		foundCustomer.setRentals(customerRentals);
+		foundCustomer.addRental(rental);
 	}
 
 	private void registerCustomer() {
