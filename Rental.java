@@ -71,4 +71,18 @@ public class Rental {
 		daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 		return daysRented;
 	}
+
+	public double calcCharge(double eachCharge, int daysRented) {
+		switch (getVideo().getPriceCode()) {
+		case Video.REGULAR:
+			eachCharge += 2;
+			if (daysRented > 2)
+				eachCharge += (daysRented - 2) * 1.5;
+			break;
+		case Video.NEW_RELEASE:
+			eachCharge = daysRented * 3;
+			break;
+		}
+		return eachCharge;
+	}
 }
