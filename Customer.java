@@ -3,6 +3,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Customer {
+	private static final int PointForTwoCoupon = 30;
+	private static final int PointForOneCoupon = 10;
+
 	private String name;
 
 	private List<Rental> rentals = new ArrayList<Rental>();
@@ -78,11 +81,11 @@ public class Customer {
 		result += "Total charge: " + totalCharge + "\tTotal Point:" + totalPoint + "\n";
 
 
-		if ( totalPoint >= 10 ) {
-			System.out.println("Congrat! You earned one free coupon");
-		}
-		if ( totalPoint >= 30 ) {
+		if ( totalPoint >= PointForTwoCoupon ) {
 			System.out.println("Congrat! You earned two free coupon");
+		}
+		else if (totalPoint >= PointForOneCoupon ) {
+			System.out.println("Congrat! You earned one free coupon");
 		}
 		return result ;
 	}
