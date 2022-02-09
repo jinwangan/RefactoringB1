@@ -82,7 +82,7 @@ public class VRUI {
 				return customer ;
 			}
 		}
-		return new null;
+		return null;
 	}
 
 	private void init() {
