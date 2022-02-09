@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class VRUI {
 	private static Scanner scanner = new Scanner(System.in) ;
 
-	private List<ConcreteCustomer> customers = new ArrayList<ConcreteCustomer>() ;
+	private List<Customer> customers = new ArrayList<Customer>() ;
 
 	private List<Video> videos = new ArrayList<Video>() ;
 
@@ -37,7 +37,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		ConcreteCustomer foundCustomer = findCustomer(customerName);
+		Customer foundCustomer = findCustomer(customerName);
 
 		// query
 		foundCustomer.printCustomerInfo();
@@ -56,7 +56,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		ConcreteCustomer foundCustomer = findCustomer(customerName);
+		Customer foundCustomer = findCustomer(customerName);
 		if ( foundCustomer == null ) return ;
 
 		System.out.println("Enter video title to return: ") ;
@@ -72,18 +72,18 @@ public class VRUI {
 		}
 	}
 
-	private ConcreteCustomer findCustomer(String customerName) {
-		for ( ConcreteCustomer customer: customers ) {
+	private Customer findCustomer(String customerName) {
+		for ( Customer customer: customers ) {
 			if ( customer.getName().equals(customerName)) {
 				return customer ;
 			}
 		}
-		return new NullCustomer(customerName);
+		return null;
 	}
 
 	private void init() {
-		ConcreteCustomer james = new ConcreteCustomer("James") ;
-		ConcreteCustomer brown = new ConcreteCustomer("Brown") ;
+		Customer james = new Customer("James") ;
+		Customer brown = new Customer("Brown") ;
 		customers.add(james) ;
 		customers.add(brown) ;
 
@@ -110,7 +110,7 @@ public class VRUI {
 
 	public void listCustomers() {
 		System.out.println("List of customers");
-		for ( ConcreteCustomer customer: customers ) {
+		for ( Customer customer: customers ) {
 			System.out.println("Name: " + customer.getName() +
 					"\tRentals: " + customer.getRentals().size()) ;
 			for ( Rental rental: customer.getRentals() ) {
@@ -125,7 +125,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		ConcreteCustomer foundCustomer = findCustomer(customerName);
+		Customer foundCustomer = findCustomer(customerName);
 
 		if ( foundCustomer == null ) {
 			System.out.println("No customer found") ;
@@ -139,7 +139,7 @@ public class VRUI {
 		System.out.println("Enter customer name: ") ;
 		String customerName = scanner.next() ;
 
-		ConcreteCustomer foundCustomer = findCustomer(customerName);
+		Customer foundCustomer = findCustomer(customerName);
 
 		if ( foundCustomer == null ) return ;
 
@@ -168,7 +168,7 @@ public class VRUI {
 	private void registerCustomer() {
 		System.out.println("Enter customer name: ") ;
 		String name = scanner.next();
-		ConcreteCustomer customer = new ConcreteCustomer(name) ;
+		Customer customer = new Customer(name) ;
 		customers.add(customer) ;
 	}
 

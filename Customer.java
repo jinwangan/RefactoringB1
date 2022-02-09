@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ConcreteCustomer {
+public class Customer {
 	private String name;
 
 	private List<Rental> rentals = new ArrayList<Rental>();
 
-	public ConcreteCustomer(String name) {
+	public Customer(String name) {
 		this.setName(name);
 	}
 
